@@ -17,7 +17,7 @@ class DictClusterStep(object):
 
     def dictionaried(self):
         result = list()
-        for key, value in tqdm(self.log_messages.items(), desc='dictionaried'):
+        for key, value in tqdm(self.log_messages.items(), desc='dictionarized'):
             termset = list()
             for word in value['Content']:
                 if hasdigit(word):
@@ -53,4 +53,6 @@ class DictClusterStep(object):
             result_group[tot] = validTokens_group[key]
             tot += 1
         print('After Dictionarized and Clustering, total: {} bin(s)'.format(len(result_group.keys())))
+        #   result_group= ClusterID: [{message':[....], ValidTokens: [....],LineID:...}, {message':[....], ValidTokens: [....],LineID:...}....]
         return result_group
+

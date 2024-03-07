@@ -125,27 +125,36 @@ class MaskStep(object):
                     template = temp_template
             template_list.append([key, template])
             template_dict[key] = template
-        # sort out the remainder templates and place wildcard as the first place 
+        # sort out the remainder templates and place wildcard as the first place
         template_list = sorted(template_list, key=lambda entry: maskdel(entry[1]))
         trie = Trie()
         for entry in tqdm(template_list, desc='merge using prefix tree'):
             template = entry[1]
             key = entry[0]
             tag = trie.find(template)
+            # If find returns -1, it means the template is not found in the trie, and thus, it's a new unique template.
             if tag == -1:
                 trie.insert(template, key)
             else:
+                 # else the current cluster's template (identified by key) has a structure already represented by a template (identified by tag )
                 self.dictionarize_clusters[tag].extend(self.dictionarize_clusters[key])
                 self.dictionarize_clusters.pop(key)
-        for key in tqdm(self.dictionarize_clusters, desc='generate output'):
+        for key in tqdm(self.dictionarize_clusters, desc='generate outputs from tree'):
             sorted_list = [[x['message'], x['LineId']] for x in self.dictionarize_clusters[key]]
-            clustIDs = list()
+            # created a list to collect IDs of log entries that belong to the same cluster
+            IDs = list()
             for index, rs in enumerate(sorted_list):
-                clustIDs.append(rs[1])
+                IDs.append(rs[1])
             template = ' '.join(template_dict[key])
-            templates[template] = clustIDs
+            templates[template] = IDs
             for index, rs in enumerate(self.dictionarize_clusters[key]):
                 rs['template'] = template
         pickle.dump(template_dict, open('templates.pkl', 'wb'))
+
         print('After mask layer finish, total: {} bin(s)'.format(len(self.dictionarize_clusters)))
+        #   self.dictionarize_clusters= ClusterID: [{message':[....], ValidTokens: [....],LineID:..., template:...},
+        #   {message':[....], ValidTokens: [....],LineID:...,template:...}....]
+
+        # templates= 'template:[linid1,lineid2,lineid3.....]
+
         return self.dictionarize_clusters, templates
