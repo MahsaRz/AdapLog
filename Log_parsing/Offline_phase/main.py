@@ -56,31 +56,35 @@ def generate_logformat_regex(logformat):
 
 
 benchmark_settings = {
-    'HDFS': {
-        'log_file': 'HDFS/HDFS_2k.log',
-        'log_format': '<Date> <Time> <Pid> <Level> <Component>: <Content>',
-        'regex': [r'blk_-?\d+', r'(\d+\.){3}\d+(:\d+)?']
+    # 'HDFS': {
+    #     'log_file': 'HDFS/HDFS_2k.log',
+    #     'log_format': '<Date> <Time> <Pid> <Level> <Component>: <Content>',
+    #     'regex': [r'blk_-?\d+', r'(\d+\.){3}\d+(:\d+)?']
+    # },
+    #
+    # 'Spark': {
+    #     'log_file': 'Spark/Spark_2k.log',
+    #     'log_format': '<Date> <Time> <Level> <Component>: <Content>',
+    #     'regex': [r'(\d+\.){3}\d+', r'\b[KGTM]?B\b', r'([\w-]+\.){2,}[\w-]+']
+    # },
+    #
+    # 'BGL': {
+    #     'log_file': 'BGL/BGL_2k.log',
+    #     'log_format': '<Label> <Timestamp> <Date> <Node> <Time> <NodeRepeat> <Type> <Component> <Level> <Content>',
+    #     'regex': [r'core\.\d+']
+    # },
+
+
+    # 'OpenStack': {
+    #     'log_file': 'OpenStack/OpenStack_2k.log',
+    #     'log_format': '<Logrecord> <Date> <Time> <Pid> <Level> <Component> \[<ADDR>\] <Content>',
+    #     'regex': [r'((\d+\.){3}\d+,?)+', r'/.+?\s', r'\s\d+\s']
+    # },
+    'Zookeeper': {
+        'log_file': 'Zookeeper/Zookeeper_2k.log',
+        'log_format': '<Date> <Time> - <Level>  \[<Node>:<Component>@<Id>\] - <Content>',
+        'regex': [r'(/|)(\d+\.){3}\d+(:\d+)?']
     },
-
-    'Spark': {
-        'log_file': 'Spark/Spark_2k.log',
-        'log_format': '<Date> <Time> <Level> <Component>: <Content>',
-        'regex': [r'(\d+\.){3}\d+', r'\b[KGTM]?B\b', r'([\w-]+\.){2,}[\w-]+']
-    },
-
-    'BGL': {
-        'log_file': 'BGL/BGL_2k.log',
-        'log_format': '<Label> <Timestamp> <Date> <Node> <Time> <NodeRepeat> <Type> <Component> <Level> <Content>',
-        'regex': [r'core\.\d+']
-    },
-
-
-    'OpenStack': {
-        'log_file': 'OpenStack/OpenStack_2k.log',
-        'log_format': '<Logrecord> <Date> <Time> <Pid> <Level> <Component> \[<ADDR>\] <Content>',
-        'regex': [r'((\d+\.){3}\d+,?)+', r'/.+?\s', r'\s\d+\s']
-    },
-
 }
 
 if __name__ == '__main__':
@@ -109,7 +113,7 @@ if __name__ == '__main__':
         # dictionarize step and cluster by termset
         dict_group_result = DictClusterStep(log_messages, corpus).run()
         # LCS and prefix tree steps
-        results, templates = MaskStep(dict_group_result).run()
+        dictionarize_clusters, templates = MaskStep(dict_group_result).run()
         output_file = os.path.join(outdir, log_file)
         # output parsing results
         FileOutputStep(log_messages, output_file, templates, ['LineId'] + headers).run()
