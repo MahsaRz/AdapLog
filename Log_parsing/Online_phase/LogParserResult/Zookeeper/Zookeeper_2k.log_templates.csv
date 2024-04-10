@@ -1,0 +1,37 @@
+EventId,EventTemplate
+ecefe136,caught end of stream exception
+16e13a06,Client attempting to establish new session at /<*>
+a6705c08,Established session <*> with negotiated timeout <*> for client /<*>
+b9a04571,Connection request from old client /<*>; will be dropped if server is in r-o mode
+18863e3d,Revalidating client: 0x24f0557806a001c
+bde42fae,autopurge.purgeInterval set to <*>
+689b0f5e,maxSessionTimeout set to -1
+f4cc9d27,Received connection request /<*>
+c172d526,FOLLOWING
+c2d2b5cf,Accepted socket connection from /<*>
+cbd1e3c7,Client attempting to renew session 0x24f0557806a0020 at /<*>
+faeda298,Closed socket connection for client /<*> which had sessionid <*>
+73fdf93d,Server environment:<*>=<*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*>
+a3e8a36b,Have quorum of supporters; starting up and setting last processed zxid: 0xb00000000
+4e588b2c,"Notification: <*> (n.leader), 0xa0000009a (n.zxid), 0x1 (n.round), FOLLOWING (n.state), <*> (n.sid), 0xa (n.peerEPoch), LEADING (my state)"
+5693b05a,"Expiring session <*>, timeout of 10000ms exceeded"
+61a003ea,Processed session termination for sessionid: <*>
+c7ef5ae9,shutdown of request processor complete
+ecf6827a,Exception causing close of session 0x0 due to java.io.IOException: ZooKeeperServer not running
+40db7d01,Closed socket connection for client /<*> (no session established for client)
+9cb3def4,First is 0x0
+f8468763,"Notification: <*> (n.leader), 0xb0000007b (n.zxid), 0x2 (n.round), LOOKING (n.state), <*> (n.sid), 0xb (n.peerEPoch), LEADING (my state)"
+a9459b27,Reading snapshot /var/lib/zookeeper/version-2/snapshot.b00000084
+9d86801d,Sending DIFF
+00078e14,LOOKING
+4c5926a1,Getting a snapshot from leader
+070f1a26,Cannot open channel to <*> at election address /<*>
+b071c188,"Notification: <*> (n.leader), <*> (n.zxid), <*> (n.round), LOOKING (n.state), <*> (n.sid), <*> (n.peerEPoch), LOOKING (my state)"
+45a3ec5d,Interrupted while waiting for message on queue
+d91560a0,"Connection broken for id <*>, my id = <*>, error ="
+7a2ec7d0,Send worker leaving thread
+273e53f2,Interrupting SendWorker
+93a3ce40,"Notification: <*> (n.leader), 0x100001564 (n.zxid), 0x3 (n.round), FOLLOWING (n.state), <*> (n.sid), 0x2 (n.peerEPoch), FOLLOWING (my state)"
+5bd1f197,minSessionTimeout set to -1
+467d31ff,Server environment:os.name=Linux
+17644875,Server environment:user.name=zookeeper
